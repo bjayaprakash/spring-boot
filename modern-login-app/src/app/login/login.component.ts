@@ -1,11 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common'; // Import NgIf
+import { NgIf } from '@angular/common'; // NgIf for *ngIf directives
+
+// Angular Material Modules
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
-  standalone: true, // Assuming standalone based on Angular 19 defaults
-  imports: [ReactiveFormsModule, NgIf], // Add NgIf here
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    NgIf, // For *ngIf
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

@@ -1,17 +1,8 @@
 @use "sass:math";
 
-// Variables
-$primary-color: #007bff;
-$primary-color-hover: #0056b3;
-$danger-color: #dc3545;
-$light-gray-color: #f8f9fa;
-$dark-gray-color: #343a40;
-$border-color: #ced4da;
-$input-focus-border-color: #80bdff;
-$input-focus-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-
-$base-spacing: 1rem;
-$border-radius: 0.25rem;
+// Variables (retained for consistency if needed, though Material theming handles most colors)
+$light-gray-color: #f8f9fa; // For host background
+$base-spacing: 1rem; // For consistent spacing units
 
 // Global styles for the component host to center the form
 :host {
@@ -20,88 +11,54 @@ $border-radius: 0.25rem;
   align-items: center;
   min-height: 100vh; // Full viewport height
   background-color: $light-gray-color;
-  padding: $base-spacing;
+  padding: $base-spacing; // Padding around the card on small screens
 }
 
-.login-container {
-  background-color: #fff;
-  padding: $base-spacing * 2;
-  border-radius: $border-radius * 2;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px; // Max width for the form
+.login-card {
+  max-width: 400px;
+  width: 100%; // Ensure it doesn't exceed viewport on very small screens
+  margin: $base-spacing auto; // Auto margins for horizontal centering if :host wasn't flex centered
+  padding: $base-spacing; // Add some internal padding to the card
 
-  h2 {
+  mat-card-title {
     text-align: center;
-    color: $dark-gray-color;
-    margin-bottom: $base-spacing * 1.5;
+    margin-bottom: $base-spacing * 1.5; // Space below the title
   }
 
-  .form-group {
-    margin-bottom: $base-spacing;
-
-    label {
-      display: block;
-      margin-bottom: math.div($base-spacing, 2);
-      color: $dark-gray-color;
-      font-weight: bold;
-    }
-
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: $base-spacing * 0.75;
-      border: 1px solid $border-color;
-      border-radius: $border-radius;
-      box-sizing: border-box; // Ensures padding doesn't affect width
-
-      &:focus {
-        border-color: $input-focus-border-color;
-        box-shadow: $input-focus-box-shadow;
-        outline: none;
-      }
-    }
-  }
-
-  .login-button {
-    width: 100%;
-    padding: $base-spacing * 0.75;
-    background-color: $primary-color;
-    color: white;
-    border: none;
-    border-radius: $border-radius;
-    font-size: $base-spacing;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: $primary-color-hover;
-    }
-
-    &:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-  }
-
-  .error-message {
-    color: $danger-color;
-    font-size: $base-spacing * 0.875;
-    margin-top: math.div($base-spacing, 3);
-
-    div { // Individual error messages
-        margin-top: math.div($base-spacing, 4);
-    }
+  mat-card-content {
+    // Form itself is here, no direct styling needed unless specific overrides
+    // Spacing between form fields is handled by mat-form-field's default margins or can be adjusted if needed
   }
 }
+
+.full-width-field {
+  width: 100%;
+  margin-bottom: $base-spacing * 0.5; // Slightly reduced margin as mat-form-field has some
+}
+
+.login-button {
+  width: 100%;
+  margin-top: $base-spacing; // Space above the button
+  padding: ($base-spacing * 0.5) 0; // Adjust padding for Material button if needed
+  // Material button height is standard, font size also from theme.
+}
+
+// mat-error styling is generally handled by the Material theme.
+// If specific overrides are needed, they can be added here, for example:
+// .mat-mdc-form-field-error {
+//   font-size: $base-spacing * 0.8;
+// }
 
 // Responsive adjustments
 @media (max-width: 480px) {
-  .login-container {
-    padding: $base-spacing * 1.5;
+  .login-card {
+    // max-width can be adjusted if needed for very small screens, but 100% width handles it.
+    margin-top: $base-spacing;
+    margin-bottom: $base-spacing;
+    padding: $base-spacing * 0.75;
   }
 
-  h2 {
+  mat-card-title {
     font-size: $base-spacing * 1.5; // Slightly smaller title on small screens
   }
 }
