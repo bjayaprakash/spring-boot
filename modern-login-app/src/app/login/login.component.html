@@ -1,21 +1,27 @@
-<div class="login-container">
-  <h2>Login</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" formControlName="email" placeholder="Enter your email">
-      <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="error-message">
-        <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</div>
-        <div *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" formControlName="password" placeholder="Enter your password">
-      <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="error-message">
-        <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
-      </div>
-    </div>
-    <button type="submit" class="login-button" [disabled]="loginForm.invalid">Login</button>
-  </form>
-</div>
+<mat-card class="login-card">
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" id="email" formControlName="email" placeholder="Enter your email">
+        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+          Email is required.
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+          Invalid email format.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" id="password" formControlName="password" placeholder="Enter your password">
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+          Password is required.
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" class="login-button">Login</button>
+    </form>
+  </mat-card-content>
+</mat-card>
